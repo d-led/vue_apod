@@ -8,7 +8,7 @@
       <div class="row">
 
 
-    <label>{{Date.now()}}</label>
+    <datetime type="date" format="yyyy-MM-dd" v-model="dateString" auto=true></datetime>
     </div>
         <div class="row">
     <b-btn @click="loadApod">Go!</b-btn>
@@ -27,6 +27,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Datetime from 'vue-datetime';
+import { DateTime } from 'luxon';
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css';
+
+Vue.component('datetime', Datetime);
+Vue.use(Datetime)
 
 @Component({
   props: {
@@ -40,11 +47,20 @@ export default class HelloWorld extends Vue {
     explanation: ''
   }
 
-  when = Date.now()
+  dateString = Date.now().toString()
+
+  get queryDate() {
+    let date = new Date(this.dateString);
+    return DateTime.fromJSDate(date).toFormat('yyyy-MM-dd');
+  }
+
+  mounted () {
+    this.dateString = Date.now().toString()
+  }
   
   loadApod() {
     var vm = this
-    fetch("https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf&date=2012-12-22")
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf&date=${vm.queryDate}`)
     .then(function (response) {
     return response.json()
     })
