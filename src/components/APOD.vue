@@ -6,23 +6,28 @@
           <h2>Choose the date</h2>
         </div>
         <div class="row">
-          <datetime class="border mb-3 mt" type="date" format="yyyy-MM-dd" v-model="dateString"></datetime>
+          <datetime class="border mb-3 mt" type="date" v-model="dateString" :auto=true></datetime>
         </div>
         <div class="row">
           <b-btn @click="loadApod">Go!</b-btn>
+           <div v-if="apod.msg" class="row alert alert-danger" role="alert">
+            {{apod.msg}}
+          </div>
+        
         </div>
+
       </div>
       <div class="col mb-1">
         <div class="row">
           <h2>{{apod.title}}</h2>
         </div>
         <div class="row">
-          <img v-if="apod.url" v-bind:src="apod.url" height="auto">
+          <img v-if="apod.url && apod.media_type=='image'" v-bind:src="apod.url" height="auto">
         </div>
         <div class="row">
           <p v-if="apod.explanation">{{apod.explanation}}</p>
         </div>
-      </div>
+     </div>
     </div>
   </div>
 </template>
@@ -46,25 +51,28 @@ export default class HelloWorld extends Vue {
   apod = {
     title: '',
     url: '',
-    explanation: ''
+    explanation: '',
+    media_type: 'image',
+    msg: '',
   }
 
   dateString = Date.now().toString()
 
   get queryDate() {
-    let date = this.dateString ? new Date(this.dateString) : Date.now();
+    // debugger;
+    let date = new Date(Date.now());
+    if(typeof this.dateString!='undefined' && this.dateString) {
+      date = new Date(this.dateString);
+    }
     return DateTime.fromJSDate(date).toFormat('yyyy-MM-dd');
   }
 
-  mounted () {
-    this.dateString = Date.now().toString()
-  }
-  
   loadApod() {
     var vm = this
+
     fetch(`https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf&date=${vm.queryDate}`)
     .then(function (response) {
-    return response.json()
+      return response.json()
     })
     .then(function (data) {
       vm.apod = data
