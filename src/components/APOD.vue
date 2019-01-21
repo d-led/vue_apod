@@ -1,7 +1,7 @@
 <template>
   <div class="container text-left">
     <div class="row">
-    <div class="col-2">
+    <div class="col-2 mb-1">
       <div class="row">
     <h2>Choose the date</h2>
       </div>
@@ -14,10 +14,10 @@
     <b-btn @click="loadApod">Go!</b-btn>
       </div>
       </div>
-    <div class="col">
+    <div class="col mb-1">
       <div class="row">
     <h2>{{apod.title}}</h2>
-    <img v-if="apod.url" v-bind:src="apod.url" class="img-thumbnail" height="auto">
+    <img v-if="apod.url" v-bind:src="apod.url" height="auto">
     <p v-if="apod.explanation">{{apod.explanation}}</p>
       </div>
     </div>
@@ -39,10 +39,12 @@ export default class HelloWorld extends Vue {
     url: '',
     explanation: ''
   }
+
+  when = Date.now()
   
   loadApod() {
     var vm = this
-    fetch("https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf")
+    fetch("https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf&date=2012-12-22")
     .then(function (response) {
     return response.json()
     })
