@@ -1,27 +1,29 @@
 <template>
   <div class="container text-left">
     <div class="row">
-    <div class="col-2 mb-1">
-      <div class="row">
-    <h2>Choose the date</h2>
-      </div>
-      <div class="row">
-
-
-    <datetime type="date" format="yyyy-MM-dd" v-model="dateString" auto=true></datetime>
-    </div>
+      <div class="col-2 mb-1">
         <div class="row">
-    <b-btn @click="loadApod">Go!</b-btn>
+          <h2>Choose the date</h2>
+        </div>
+        <div class="row">
+          <datetime class="border mb-3 mt" type="date" format="yyyy-MM-dd" v-model="dateString"></datetime>
+        </div>
+        <div class="row">
+          <b-btn @click="loadApod">Go!</b-btn>
+        </div>
       </div>
-      </div>
-    <div class="col mb-1">
-      <div class="row">
-    <h2>{{apod.title}}</h2>
-    <img v-if="apod.url" v-bind:src="apod.url" height="auto">
-    <p v-if="apod.explanation">{{apod.explanation}}</p>
+      <div class="col mb-1">
+        <div class="row">
+          <h2>{{apod.title}}</h2>
+        </div>
+        <div class="row">
+          <img v-if="apod.url" v-bind:src="apod.url" height="auto">
+        </div>
+        <div class="row">
+          <p v-if="apod.explanation">{{apod.explanation}}</p>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -50,7 +52,7 @@ export default class HelloWorld extends Vue {
   dateString = Date.now().toString()
 
   get queryDate() {
-    let date = new Date(this.dateString);
+    let date = this.dateString ? new Date(this.dateString) : Date.now();
     return DateTime.fromJSDate(date).toFormat('yyyy-MM-dd');
   }
 
