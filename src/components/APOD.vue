@@ -1,9 +1,11 @@
 <template>
   <div class="apod">
+    <h1>Choose the date:</h1>
+    <label>{{Date.now()}}</label></br>
     <button @click="loadApod">Go!</button>
     <h1>{{apod.title}}</h1>
     <img v-if="apod.url" v-bind:src="apod.url">
-    <p>{{apod.explanation}}</p>  
+    <p v-if="apod.explanation">{{apod.explanation}}</p>  
   </div>
 </template>
 
@@ -17,9 +19,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 })
 export default class HelloWorld extends Vue {
   apod = {
-    title: '...',
+    title: '',
     url: '',
-    explanation: '...'
+    explanation: ''
   }
   
   loadApod() {
