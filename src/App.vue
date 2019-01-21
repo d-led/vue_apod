@@ -7,6 +7,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import APOD from './components/APOD.vue';
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 @Component({
   components: {

@@ -1,11 +1,27 @@
 <template>
-  <div class="apod">
-    <h1>Choose the date:</h1>
-    <label>{{Date.now()}}</label></br>
-    <button @click="loadApod">Go!</button>
-    <h1>{{apod.title}}</h1>
-    <img v-if="apod.url" v-bind:src="apod.url">
-    <p v-if="apod.explanation">{{apod.explanation}}</p>  
+  <div class="container text-left">
+    <div class="row">
+    <div class="col-2">
+      <div class="row">
+    <h2>Choose the date</h2>
+      </div>
+      <div class="row">
+
+
+    <label>{{Date.now()}}</label>
+    </div>
+        <div class="row">
+    <b-btn @click="loadApod">Go!</b-btn>
+      </div>
+      </div>
+    <div class="col">
+      <div class="row">
+    <h2>{{apod.title}}</h2>
+    <img v-if="apod.url" v-bind:src="apod.url" class="img-thumbnail" height="auto">
+    <p v-if="apod.explanation">{{apod.explanation}}</p>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -26,7 +42,7 @@ export default class HelloWorld extends Vue {
   
   loadApod() {
     var vm = this
-    fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+    fetch("https://api.nasa.gov/planetary/apod?api_key=93Zc6xLbVySlaBhnVFbCRfhORrR71T47SYTu8JUf")
     .then(function (response) {
     return response.json()
     })
@@ -39,18 +55,4 @@ export default class HelloWorld extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
