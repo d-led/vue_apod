@@ -21,7 +21,6 @@
   "devDependencies": {
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-e2e-nightwatch": "^3.3.0",
     "@vue/cli-plugin-typescript": "^3.3.0",
     "@vue/cli-plugin-unit-jest": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
