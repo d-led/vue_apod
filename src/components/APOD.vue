@@ -22,7 +22,8 @@
           <h2>{{apod.title}}</h2>
         </div>
         <div class="row">
-          <img v-if="apod.url && apod.media_type=='image'" v-bind:src="apod.url" height="auto">
+          <img v-if="apod.url && apod.media_type=='image'" v-bind:src="apod.url" height="auto" />
+          <iframe title="video" v-if="apod.mediaType=='video'" :src="apod.url" gesture="media" frameborder="0" allow="encrypted-media" allowfullscreen />
         </div>
         <div class="row">
           <p v-if="apod.explanation">{{apod.explanation}}</p>
